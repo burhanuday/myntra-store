@@ -1,0 +1,61 @@
+{
+  "gender": [
+    { "title": "Men", "value": ["men", "men women"] },
+    { "title": "Women", "value": ["women", "men women"] },
+    { "title": "Boys", "value": ["boys", "boys girls"] },
+    { "title": "Girls", "value": ["girls", "boys girls"] }
+  ],
+  "categories": [
+    {
+      "id": "Shirts",
+      "value": "Shirts",
+      "count": 88243,
+      "meta": "",
+      "pLevel": ""
+    },
+    {
+      "id": "Sleep Shirts",
+      "value": "Sleep Shirts",
+      "count": 789,
+      "meta": "",
+      "pLevel": ""
+    },
+    {
+      "id": "Dog Shirts",
+      "value": "Dog Shirts",
+      "count": 47,
+      "meta": "",
+      "pLevel": ""
+    }
+  ],
+  "price_range": [
+    {
+      "id": "239.0 TO 3102.0",
+      "count": 87160,
+      "start": 239,
+      "end": 3102,
+      "pLevel": ""
+    },
+    {
+      "id": "3102.0 TO 5965.0",
+      "count": 1777,
+      "start": 3102,
+      "end": 5965,
+      "pLevel": ""
+    },
+    {
+      "id": "5965.0 TO 8828.0",
+      "count": 115,
+      "start": 5965,
+      "end": 8828,
+      "pLevel": ""
+    },
+    {
+      "id": "8828.0 TO 11691.0",
+      "count": 23,
+      "start": 8828,
+      "end": 11691,
+      "pLevel": ""
+    }
+  ]
+}
