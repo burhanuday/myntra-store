@@ -5,6 +5,8 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 1em;
+  justify-items: center;
+  padding: 1em;
 `;
 
 const ProductGrid = ({ products }) => {
