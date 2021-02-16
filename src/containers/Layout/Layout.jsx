@@ -9,7 +9,7 @@ const Layout = () => {
     <main>
       <Header />
       <Switch>
-        <Route path="/:id" component={ProductDetail} />
+        <Route path="/shirts/:id" component={ProductDetail} />
         <Route exact path="/" component={Home} />
         <Redirect to="/" />
       </Switch>

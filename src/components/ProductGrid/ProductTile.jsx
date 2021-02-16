@@ -65,7 +65,7 @@ const ProductTile = ({ product }) => {
 
   return (
     <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Link to={product.url}>
+      <Link to={`/shirts/${product.title}`}>
         <Slider
           {...sliderSettings}
           autoplaySpeed={shouldAutoplay ? 1000 : 150000}
