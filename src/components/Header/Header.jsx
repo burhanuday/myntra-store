@@ -5,6 +5,7 @@ import { useFilters } from "../../contexts/filters-context";
 import bagIcon from "../../assets/icons/shopping-bag.svg";
 import IconButton from "../Button/IconButton";
 import { useBag } from "../../contexts/bag-modal-context";
+import { Link } from "react-router-dom";
 
 const Container = styled.header`
   padding: 1em 3em;
@@ -16,6 +17,9 @@ const Container = styled.header`
 
 const Logo = styled.h2`
   font-size: 1.2rem;
+  color: black;
+  text-decoration-style: none;
+  text-decoration: none;
 `;
 
 const SearchContainer = styled.div`
@@ -40,7 +44,9 @@ const Header = () => {
 
   return (
     <Container>
-      <Logo>Myntra</Logo>
+      <Link to="/">
+        <Logo>Myntra</Logo>
+      </Link>
       <SearchContainer>
         <IconButton onClick={handleBagClicked} src={bagIcon} />
         <SearchQueryInput
