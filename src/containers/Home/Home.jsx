@@ -21,6 +21,7 @@ const ProductGridContainer = styled.article`
 const Home = () => {
   const { brandsFilter, priceFilters, searchQuery } = useFilters();
 
+  // Filter products based on brands, price and search query
   const filteredProducts = useMemo(() => {
     let products = allProducts;
     if (brandsFilter.length) {

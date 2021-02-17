@@ -1,6 +1,8 @@
 /**
  * Hook with the same api as use state
  *  data is persisted with localstorage
+ * @param key the key to use for localstorage
+ * @param initialValue initial value to use for key
  */
 
 import { useState } from "react";

@@ -30,8 +30,10 @@ const BagProvider = ({ children }) => {
   const [products, setProducts] = useLocalStorage(BAG_STORAGE_KEY, []);
   const [showBag, setShowBagModal] = useState(false);
 
+  // Handle modal closed
   const handleClosePressed = () => setShowBagModal(false);
 
+  // Handle remove product from bag
   const handleProductRemoved = (url) => {
     const newProducts = products.filter((p) => p.url !== url);
     setProducts(newProducts);

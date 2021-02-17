@@ -60,6 +60,7 @@ const ProductDetail = () => {
     setBagProducts(newBagProducts);
   };
 
+  // Memoise if product is added to bag or not
   const isProductInBag = useMemo(() => {
     return bagProducts.find((p) => p.url === product?.url) ? true : false;
   }, [product, bagProducts]);
