@@ -3,10 +3,14 @@ import ProductTile from "./ProductTile";
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto;
   grid-gap: 1em;
   justify-items: center;
   padding: 1em;
+
+  @media (min-width: 768px) {
+    grid-template-columns: auto auto auto auto auto;
+  }
 `;
 
 const ProductGrid = ({ products }) => {
