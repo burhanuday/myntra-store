@@ -9,6 +9,12 @@ import { useBag } from "../../contexts/bag-modal-context";
 const Container = styled.div`
   display: flex;
   padding: 1em;
+
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const PhotoGridContainer = styled.div`
