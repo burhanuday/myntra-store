@@ -5,6 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import closeIcon from "../../assets/icons/close.svg";
+import IconButton from "../Button/IconButton";
 
 const sliderSettings = {
   infinite: true,
@@ -18,7 +20,15 @@ const sliderSettings = {
   },
 };
 
+const StyledIconButton = styled(IconButton)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+`;
+
 const Container = styled.div`
+  position: relative;
   padding: 1em;
   width: 200px;
   text-decoration: none;
@@ -56,7 +66,11 @@ const Price = styled.p`
   margin-top: 0.4em;
 `;
 
-const ProductTile = ({ product }) => {
+const ProductTile = ({
+  product,
+  onRemoveClicked,
+  showRemoveButton = false,
+}) => {
   const [shouldAutoplay, setShouldAutoplay] = useState(false);
 
   const handleMouseEnter = () => setShouldAutoplay(true);
@@ -65,6 +79,13 @@ const ProductTile = ({ product }) => {
 
   return (
     <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      {showRemoveButton && (
+        <StyledIconButton
+          size="16px"
+          src={closeIcon}
+          onClick={() => onRemoveClicked(product.url)}
+        />
+      )}
       <Link to={`/shirts/${product.title}`}>
         <Slider
           {...sliderSettings}

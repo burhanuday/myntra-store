@@ -9,6 +9,7 @@ import IconButton from "../components/Button/IconButton";
 import ProductTile from "../components/ProductGrid/ProductTile";
 
 import closeIcon from "../assets/icons/close.svg";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const ProductRow = styled.div`
   display: flex;
@@ -26,21 +27,26 @@ const BagContext = React.createContext();
 const BAG_STORAGE_KEY = "@myntra-store/bag";
 
 const BagProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
-  const [showBag, setShowBagModal] = useState(true);
+  const [products, setProducts] = useLocalStorage(BAG_STORAGE_KEY, []);
+  const [showBag, setShowBagModal] = useState(false);
 
   const handleClosePressed = () => setShowBagModal(false);
 
-  useEffect(() => {
-    if (products.length) {
-      localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify(products));
-    }
-  }, [products]);
+  const handleProductRemoved = (url) => {
+    const newProducts = products.filter((p) => p.url !== url);
+    setProducts(newProducts);
+  };
 
-  useEffect(() => {
-    const products = JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) || "[]");
-    setProducts(products);
-  }, []);
+  // useEffect(() => {
+  //   if (products.length) {
+  //     localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify(products));
+  //   }
+  // }, [products]);
+
+  // useEffect(() => {
+  //   const products = JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) || "[]");
+  //   setProducts(products);
+  // }, []);
 
   return (
     <BagContext.Provider
@@ -67,7 +73,12 @@ const BagProvider = ({ children }) => {
         </Header>
         <ProductRow>
           {products.map((product) => (
-            <ProductTile key={product.url} product={product} />
+            <ProductTile
+              key={product.url}
+              product={product}
+              showRemoveButton
+              onRemoveClicked={handleProductRemoved}
+            />
           ))}
         </ProductRow>
       </Modal>
