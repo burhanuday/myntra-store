@@ -1,7 +1,9 @@
 import ProductGrid from "../../components/ProductGrid/ProductGrid";
-import products from "../../assets/products.json";
+import allProducts from "../../assets/products.json";
 import styled from "styled-components";
 import Menu from "./Menu";
+import { useMemo } from "react";
+import { useFilters } from "../../contexts/filters-context";
 
 const Container = styled.section`
   display: flex;
@@ -16,13 +18,26 @@ const ProductGridContainer = styled.article`
 `;
 
 const Home = () => {
+  const { brandsFilter } = useFilters();
+
+  const filteredProducts = useMemo(() => {
+    let products = allProducts;
+    if (brandsFilter.length) {
+      products = products.filter((p) => {
+        return brandsFilter.includes(p.brand);
+      });
+    }
+
+    return products;
+  }, [brandsFilter]);
+
   return (
     <Container>
       <MenuContainer>
         <Menu />
       </MenuContainer>
       <ProductGridContainer>
-        <ProductGrid products={products} />
+        <ProductGrid products={filteredProducts} />
       </ProductGridContainer>
     </Container>
   );
