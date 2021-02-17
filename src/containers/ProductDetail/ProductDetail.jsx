@@ -77,7 +77,6 @@ const ProductDetail = () => {
     const product = products.find((product) => product.title === productTitle);
 
     if (product) {
-      console.log(product);
       setProduct(product);
     }
   }, [id]);

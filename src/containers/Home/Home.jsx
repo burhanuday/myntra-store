@@ -66,7 +66,6 @@ const Home = () => {
 
     if (searchQuery) {
       products = products.filter((p) => {
-        console.log(p.product.toLowerCase(), searchQuery.toLowerCase());
         return (
           p.product.toLowerCase().includes(searchQuery.toLowerCase()) ||
           p.additionalInfo.toLowerCase().includes(searchQuery.toLowerCase())
