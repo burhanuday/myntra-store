@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { brands } from "../../assets/brands";
+import { useFilters } from "../../contexts/filters-context";
 
 const Container = styled.div`
   padding: 1em;
@@ -24,16 +25,41 @@ const CheckboxLabel = styled.label`
 `;
 
 const Menu = () => {
+  const { brandsFilter, setBrandsFilter } = useFilters();
+
+  const handleBrandFilterToggle = (brand, value) => {
+    if (value) {
+      setBrandsFilter((brands) => [...brands, brand]);
+    } else {
+      const brandsClone = brandsFilter.filter((b) => b !== brand);
+      setBrandsFilter(brandsClone);
+    }
+  };
+
   return (
     <Container>
       <FilterLabel>BRAND</FilterLabel>
       <Filters>
-        {brands.map((brand) => (
-          <FormControl>
-            <input type="checkbox" id={brand} name={brand} checked />
-            <CheckboxLabel for={brand}>{brand}</CheckboxLabel>
-          </FormControl>
-        ))}
+        {brands.map((brand) => {
+          return (
+            <FormControl key={brand}>
+              <input
+                type="checkbox"
+                id={brand}
+                name={brand}
+                onChange={(e) =>
+                  handleBrandFilterToggle(e.target.name, e.target.checked)
+                }
+                checked={
+                  brandsFilter.find((b) => b === brand) === undefined
+                    ? false
+                    : true
+                }
+              />
+              <CheckboxLabel htmlFor={brand}>{brand}</CheckboxLabel>
+            </FormControl>
+          );
+        })}
       </Filters>
     </Container>
   );
