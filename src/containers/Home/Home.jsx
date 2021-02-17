@@ -49,6 +49,7 @@ const Home = () => {
       products = products.filter((product) => {
         let result = false;
 
+        // Check if the price of the product falls between the price range
         priceFilters.forEach((filterId) => {
           const filter = priceRanges.find((f) => f.id === filterId);
           if (
@@ -64,6 +65,7 @@ const Home = () => {
       });
     }
 
+    // Full text search on product name and additional info
     if (searchQuery) {
       products = products.filter((p) => {
         return (
@@ -73,6 +75,7 @@ const Home = () => {
       });
     }
 
+    // If sorting option is selected, sort the products
     if (sort) {
       if (sort === "low-to-high") {
         products.sort((a, b) => a.originalPrice - b.originalPrice);
