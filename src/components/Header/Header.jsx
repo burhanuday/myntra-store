@@ -11,8 +11,13 @@ const Container = styled.header`
   padding: 1em 3em;
   box-shadow: 0px 0px 2px 0px #aaa;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const Logo = styled.h2`
@@ -24,6 +29,11 @@ const Logo = styled.h2`
 
 const SearchContainer = styled.div`
   display: flex;
+  margin-top: 1em;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
 `;
 
 const SearchQueryInput = styled.input`
