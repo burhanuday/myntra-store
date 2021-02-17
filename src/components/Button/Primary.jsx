@@ -16,6 +16,11 @@ const PrimaryButton = styled(BaseButton)`
     color: #fff;
     text-decoration: none;
   }
+
+  &:disabled {
+    background-image: none;
+    background-color: lightgray;
+  }
 `;
 
 export default PrimaryButton;

@@ -8,7 +8,7 @@ const BaseButton = styled.button`
   background-size: 200% auto;
   box-shadow: 0 0 20px #eee;
   border-radius: 2px;
-  display: block;
+  display: inline-block;
   outline: none;
   border: none;
   font-weight: bold;
