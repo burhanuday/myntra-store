@@ -2,7 +2,7 @@
   Context provider to keep track of wishlists
 */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import styled from "styled-components";
 import IconButton from "../components/Button/IconButton";

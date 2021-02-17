@@ -18,8 +18,23 @@ const ProductGridContainer = styled.article`
   flex: 0.8;
 `;
 
+const Row = styled.div`
+  display: flex;
+  margin-top: 1em;
+  justify-content: flex-end;
+  padding-right: 2em;
+`;
+
 const Home = () => {
-  const { brandsFilter, priceFilters, searchQuery } = useFilters();
+  const {
+    brandsFilter,
+    priceFilters,
+    searchQuery,
+    sort,
+    setSort,
+  } = useFilters();
+
+  const handleSortChange = (e) => setSort(e.target.value);
 
   // Filter products based on brands, price and search query
   const filteredProducts = useMemo(() => {
@@ -59,8 +74,16 @@ const Home = () => {
       });
     }
 
+    if (sort) {
+      if (sort === "low-to-high") {
+        products.sort((a, b) => a.originalPrice - b.originalPrice);
+      } else if (sort === "high-to-low") {
+        products.sort((b, a) => a.originalPrice - b.originalPrice);
+      }
+    }
+
     return products;
-  }, [brandsFilter, priceFilters, searchQuery]);
+  }, [brandsFilter, priceFilters, searchQuery, sort]);
 
   return (
     <Container>
@@ -68,6 +91,13 @@ const Home = () => {
         <Menu />
       </MenuContainer>
       <ProductGridContainer>
+        <Row>
+          <select onChange={handleSortChange} value={sort}>
+            <option value="">Sort by price</option>
+            <option value="low-to-high">Price: low to high</option>
+            <option value="high-to-low">Price: high to low</option>
+          </select>
+        </Row>
         <ProductGrid products={filteredProducts} />
       </ProductGridContainer>
     </Container>

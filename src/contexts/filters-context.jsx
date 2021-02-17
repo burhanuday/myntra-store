@@ -10,6 +10,7 @@ const FiltersProvider = ({ children }) => {
   const [brandsFilter, setBrandsFilter] = useState([]);
   const [priceFilters, setPriceFilters] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [sort, setSort] = useState("");
 
   return (
     <FiltersContext.Provider
@@ -20,6 +21,8 @@ const FiltersProvider = ({ children }) => {
         setPriceFilters,
         searchQuery,
         setSearchQuery,
+        sort,
+        setSort,
       }}
     >
       {children}
