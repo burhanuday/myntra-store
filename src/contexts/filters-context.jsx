@@ -1,19 +1,26 @@
 /* 
-  Context provider to keep track of auth state of the app
-  Also stores the user object from firebase for use
+  Context provider to keep track of the filters 
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const FiltersContext = React.createContext();
 
 const FiltersProvider = ({ children }) => {
   const [brandsFilter, setBrandsFilter] = useState([]);
   const [priceFilters, setPriceFilters] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <FiltersContext.Provider
-      value={{ brandsFilter, setBrandsFilter, priceFilters, setPriceFilters }}
+      value={{
+        brandsFilter,
+        setBrandsFilter,
+        priceFilters,
+        setPriceFilters,
+        searchQuery,
+        setSearchQuery,
+      }}
     >
       {children}
     </FiltersContext.Provider>

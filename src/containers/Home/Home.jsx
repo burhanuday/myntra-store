@@ -19,7 +19,7 @@ const ProductGridContainer = styled.article`
 `;
 
 const Home = () => {
-  const { brandsFilter, priceFilters } = useFilters();
+  const { brandsFilter, priceFilters, searchQuery } = useFilters();
 
   const filteredProducts = useMemo(() => {
     let products = allProducts;
@@ -48,8 +48,18 @@ const Home = () => {
       });
     }
 
+    if (searchQuery) {
+      products = products.filter((p) => {
+        console.log(p.product.toLowerCase(), searchQuery.toLowerCase());
+        return (
+          p.product.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.additionalInfo.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+    }
+
     return products;
-  }, [brandsFilter, priceFilters]);
+  }, [brandsFilter, priceFilters, searchQuery]);
 
   return (
     <Container>
