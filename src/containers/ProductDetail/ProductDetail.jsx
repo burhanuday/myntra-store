@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import products from "../../assets/products.json";
+import PrimaryButton from "../../components/Button/Primary";
 import PhotoGrid from "../../components/PhotoGrid/PhotoGrid";
+import { useBag } from "../../contexts/bag-modal-context";
 
 const Container = styled.div`
   display: flex;
@@ -43,9 +45,24 @@ const Price = styled.p`
   margin-top: 0.4em;
 `;
 
+const Row = styled.div`
+  display: flex;
+  margin-top: 1em;
+`;
+
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { products: bagProducts, setProducts: setBagProducts } = useBag();
+
+  const handleAddToBagPressed = () => {
+    const newBagProducts = Array.from(new Set([...bagProducts, product]));
+    setBagProducts(newBagProducts);
+  };
+
+  const isProductInBag = useMemo(() => {
+    return bagProducts.find((p) => p.url === product?.url) ? true : false;
+  }, [product, bagProducts]);
 
   useEffect(() => {
     const productTitle = id;
@@ -68,6 +85,16 @@ const ProductDetail = () => {
         <ProductTitle>{product?.brand}</ProductTitle>
         <AdditionalInfo>{product?.additionalInfo}</AdditionalInfo>
         <Price>Rs. {product?.originalPrice}</Price>
+
+        <Row>
+          <PrimaryButton
+            disabled={isProductInBag}
+            onClick={handleAddToBagPressed}
+          >
+            {isProductInBag ? "Added to bag" : "Add to bag"}
+          </PrimaryButton>
+          {/* <DefaultButton>Add to wishlist</DefaultButton> */}
+        </Row>
       </Details>
     </Container>
   );
