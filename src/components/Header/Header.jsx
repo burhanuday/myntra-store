@@ -43,7 +43,7 @@ const SearchQueryInput = styled.input`
 `;
 
 const Header = () => {
-  const { searchQuery, setSearchQuery } = useFilters();
+  const { setSearchQuery } = useFilters();
   const [inputValue, setInputValue] = useState("");
 
   const { setShowBagModal } = useBag();
@@ -61,7 +61,7 @@ const Header = () => {
         <IconButton onClick={handleBagClicked} src={bagIcon} />
         <SearchQueryInput
           placeholder="Search products"
-          value={inputValue || searchQuery}
+          value={inputValue}
           onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
