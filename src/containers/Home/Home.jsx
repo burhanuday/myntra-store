@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Menu from "./Menu";
 import { useMemo } from "react";
 import { useFilters } from "../../contexts/filters-context";
+import { priceRanges } from "../../assets/filters";
 
 const Container = styled.section`
   display: flex;
@@ -18,7 +19,7 @@ const ProductGridContainer = styled.article`
 `;
 
 const Home = () => {
-  const { brandsFilter } = useFilters();
+  const { brandsFilter, priceFilters } = useFilters();
 
   const filteredProducts = useMemo(() => {
     let products = allProducts;
@@ -28,8 +29,27 @@ const Home = () => {
       });
     }
 
+    if (priceFilters.length) {
+      products = products.filter((product) => {
+        let result = false;
+
+        priceFilters.forEach((filterId) => {
+          const filter = priceRanges.find((f) => f.id === filterId);
+          if (
+            filter &&
+            product.originalPrice >= filter.start &&
+            product.originalPrice <= filter.end
+          ) {
+            result = true;
+          }
+        });
+
+        return result;
+      });
+    }
+
     return products;
-  }, [brandsFilter]);
+  }, [brandsFilter, priceFilters]);
 
   return (
     <Container>

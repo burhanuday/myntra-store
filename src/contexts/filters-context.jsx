@@ -9,9 +9,12 @@ const FiltersContext = React.createContext();
 
 const FiltersProvider = ({ children }) => {
   const [brandsFilter, setBrandsFilter] = useState([]);
+  const [priceFilters, setPriceFilters] = useState([]);
 
   return (
-    <FiltersContext.Provider value={{ brandsFilter, setBrandsFilter }}>
+    <FiltersContext.Provider
+      value={{ brandsFilter, setBrandsFilter, priceFilters, setPriceFilters }}
+    >
       {children}
     </FiltersContext.Provider>
   );

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { brands } from "../../assets/brands";
+import { brands, priceRanges } from "../../assets/filters";
 import { useFilters } from "../../contexts/filters-context";
 
 const Container = styled.div`
@@ -16,6 +16,7 @@ const FormControl = styled.div`
 
 const FilterLabel = styled.h3`
   font-size: 1rem;
+  margin-top: 1em;
 `;
 
 const CheckboxLabel = styled.label`
@@ -25,7 +26,12 @@ const CheckboxLabel = styled.label`
 `;
 
 const Menu = () => {
-  const { brandsFilter, setBrandsFilter } = useFilters();
+  const {
+    brandsFilter,
+    setBrandsFilter,
+    priceFilters,
+    setPriceFilters,
+  } = useFilters();
 
   const handleBrandFilterToggle = (brand, value) => {
     if (value) {
@@ -33,6 +39,15 @@ const Menu = () => {
     } else {
       const brandsClone = brandsFilter.filter((b) => b !== brand);
       setBrandsFilter(brandsClone);
+    }
+  };
+
+  const handlePriceFilterToggle = (priceId, value) => {
+    if (value) {
+      setPriceFilters((prices) => [...prices, priceId]);
+    } else {
+      const pricesClone = priceFilters.filter((p) => p !== priceId);
+      setPriceFilters(pricesClone);
     }
   };
 
@@ -57,6 +72,30 @@ const Menu = () => {
                 }
               />
               <CheckboxLabel htmlFor={brand}>{brand}</CheckboxLabel>
+            </FormControl>
+          );
+        })}
+      </Filters>
+
+      <FilterLabel>PRICE</FilterLabel>
+      <Filters>
+        {priceRanges.map((range) => {
+          return (
+            <FormControl key={range.id}>
+              <input
+                type="checkbox"
+                id={range.id}
+                name={range.id}
+                onChange={(e) =>
+                  handlePriceFilterToggle(e.target.name, e.target.checked)
+                }
+                checked={
+                  priceFilters.find((p) => p === range.id) === undefined
+                    ? false
+                    : true
+                }
+              />
+              <CheckboxLabel htmlFor={range.id}>{range.id}</CheckboxLabel>
             </FormControl>
           );
         })}
